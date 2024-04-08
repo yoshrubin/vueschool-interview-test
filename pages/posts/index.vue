@@ -21,10 +21,7 @@ console.log(posts.value);
   <div class="h-screen flex justify-center items-center">
     <div v-if="pending">Loading...</div>
     <div v-else class="space-y-5">
-      <div v-for="(post, index) in posts" :key="index">
-        <NuxtImg :src="post.image" />
-        <h2 class="text-xl font-bold">{{ post.title }}</h2>
-      </div>
+      <Post :post="post" v-for="(post, index) in posts" :key="index" />
     </div>
     <!-- <h1 class="text-2xl">Display The Paginated Posts Here</h1>
       <ul class="list-disc list-inside ml-10">
