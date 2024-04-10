@@ -1,42 +1,42 @@
 <script setup lang="ts">
-const pagination = reactive({
+import { useInfiniteScroll } from "@vueuse/core";
+import { is } from "drizzle-orm";
+const query = reactive({
   limit: 10,
   offset: 0,
   order: "newestFirst",
 });
 
-const {
-  data: posts,
-  pending,
-  error,
-  refresh,
-} = await useFetch("/api/posts", {
-  pagination,
-});
-
-console.log(posts.value);
+const target = ref<HTMLElement | null>(null);
+const posts = ref<Post[]>([]);
+const canLoadMore = ref(true);
+const isLoading = ref(false);
+useInfiniteScroll(
+  target,
+  async () => {
+    isLoading.value = true;
+    const { data } = await useFetch("/api/posts", {
+      query,
+    });
+    isLoading.value = false;
+    query.offset += query.limit;
+    if (data.value?.length) {
+      posts.value.push(...data.value);
+    } else {
+      canLoadMore.value = false;
+    }
+  },
+  { distance: 10, canLoadMore: () => canLoadMore.value }
+);
 </script>
 
 <template>
-  <div class="h-screen flex justify-center items-center">
-    <div v-if="pending">Loading...</div>
-    <div v-else class="space-y-5">
-      <Post :post="post" v-for="(post, index) in posts" :key="index" />
+  <div class="h-screen flex justify-center items-center flex-col">
+    <div ref="target" class="w-full overflow-auto">
+      <div class="!w-min min-w-full">
+        <Post :post="post" v-for="(post, index) in posts" :key="index" />
+        <div v-if="isLoading">Loading...</div>
+      </div>
     </div>
-    <!-- <h1 class="text-2xl">Display The Paginated Posts Here</h1>
-      <ul class="list-disc list-inside ml-10">
-        <li>Keep performance in mind</li>
-        <li>Make sure to display optimized images</li>
-        <li>Paginate according to your desired strategy</li>
-        <li>Provide a sort order control</li>
-        <li>Store the sort order in the URL</li>
-        <li>Make it look good 💪</li>
-        <li>
-          Then
-          <NuxtLink class="text-blue-500 underline" to="/posts/hello">
-            go to the next task (displaying the individual post)</NuxtLink
-          >
-        </li>
-      </ul> -->
   </div>
 </template>
