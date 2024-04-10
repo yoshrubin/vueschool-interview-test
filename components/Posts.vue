@@ -31,7 +31,10 @@ useInfiniteScroll(
 
 <template>
   <div class="h-screen flex justify-center items-center flex-col">
-    <div ref="target" class="w-full overflow-auto h-full">
+    <div
+      ref="target"
+      class="w-full overflow-auto h-full grid grid-cols-2 gap-4 px-8 mx-auto"
+    >
       <Post :post="post" v-for="(post, index) in posts" :key="index" />
       <div v-if="isLoading">Loading...</div>
     </div>
