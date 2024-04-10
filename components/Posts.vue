@@ -23,12 +23,12 @@ useInfiniteScroll(
 
 async function loadData() {
   isLoading.value = true;
-  const { data } = await useFetch<PostWithUser[]>("/api/posts", {
+  const data = await $fetch<PostWithUser[]>("/api/posts", {
     query,
   });
   isLoading.value = false;
-  if (data.value?.length) {
-    posts.value.push(...data.value);
+  if (data.length) {
+    posts.value.push(...data);
   } else {
     canLoadMore.value = false;
   }
