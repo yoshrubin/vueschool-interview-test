@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: "Posts",
-  ogTitle: "Posts",
-  description: "Posts page",
-  ogDescription: "Posts page",
+  title: "Blog Posts",
+  ogTitle: "Blog Posts",
+  description: "Check out our blog posts!",
+  ogDescription: "Check out our blog posts!",
 });
 </script>
 
