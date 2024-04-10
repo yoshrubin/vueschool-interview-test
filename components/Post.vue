@@ -5,11 +5,12 @@ console.log(post);
 </script>
 
 <template>
-  <div
+  <NuxtLink
     v-if="post"
+    :to="`/posts/${post.id}`"
     class="border-b border border-gray-900 rounded-lg shadow-md p-5"
   >
     <NuxtImg :src="post.image" />
     <h2 class="text-xl font-bold">{{ post.title }}</h2>
-  </div>
+  </NuxtLink>
 </template>
