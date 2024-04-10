@@ -9,7 +9,7 @@ const query = reactive({
 });
 
 const target = ref<HTMLElement | null>(null);
-const posts = ref<Post[]>([]);
+const posts = ref<PostWithUser[]>([]);
 const canLoadMore = ref(true);
 const isLoading = ref(false);
 useInfiniteScroll(
@@ -23,7 +23,7 @@ useInfiniteScroll(
 
 async function loadData() {
   isLoading.value = true;
-  const { data } = await useFetch("/api/posts", {
+  const { data } = await useFetch<PostWithUser[]>("/api/posts", {
     query,
   });
   isLoading.value = false;
@@ -69,11 +69,7 @@ watch(
         <label class="ml-2" for="oldestFirst">Oldest First</label>
       </div>
       <div class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
-        <Post
-          :post="post as PostWithUser"
-          v-for="(post, index) in posts"
-          :key="index"
-        />
+        <Post :post="post" v-for="(post, index) in posts" :key="index" />
         <div v-if="isLoading">Loading...</div>
       </div>
     </div>
