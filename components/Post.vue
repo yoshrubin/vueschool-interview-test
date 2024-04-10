@@ -22,6 +22,7 @@ const formattedDate = useDateFormat(datePosted, "MMMM Do, YYYY");
       width="400"
       height="300"
       loading="lazy"
+      :alt="post.title"
     />
     <h2 class="text-xl font-bold">{{ post.title }}</h2>
     <p class="text-gray-500">{{ post.excerpt }}</p>
@@ -32,6 +33,7 @@ const formattedDate = useDateFormat(datePosted, "MMMM Do, YYYY");
         width="64"
         height="64"
         loading="lazy"
+        :alt="`${post.user.firstName} ${post.user.lastName}`"
       />
       <div>
         <p>{{ post.user.firstName }} {{ post.user.lastName }}</p>
