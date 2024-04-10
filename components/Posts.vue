@@ -34,15 +34,24 @@ async function loadData() {
   }
 }
 
+const router = useRouter();
 watch(
   () => query.order,
   () => {
+    router.push({ query: { order: query.order } });
     posts.value = [];
     query.offset = 0;
     canLoadMore.value = true;
     loadData();
   }
 );
+
+const route = useRoute();
+onMounted(() => {
+  if (route.query.order) {
+    query.order = route.query.order as string;
+  }
+});
 </script>
 
 <template>
