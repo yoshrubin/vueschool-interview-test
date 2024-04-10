@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useInfiniteScroll } from "@vueuse/core";
+import type { PostWithUser } from "~/types";
 const query = reactive({
   limit: 10,
   offset: 0,
   order: "newestFirst",
+  include: "user",
 });
 
 const target = ref<HTMLElement | null>(null);
@@ -67,7 +69,11 @@ watch(
         <label class="ml-2" for="oldestFirst">Oldest First</label>
       </div>
       <div class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
-        <Post :post="post" v-for="(post, index) in posts" :key="index" />
+        <Post
+          :post="post as PostWithUser"
+          v-for="(post, index) in posts"
+          :key="index"
+        />
         <div v-if="isLoading">Loading...</div>
       </div>
     </div>
