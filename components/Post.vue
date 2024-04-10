@@ -11,7 +11,7 @@ const datePosted = post?.publishedAt
   <NuxtLink
     v-if="post"
     :to="`/posts/${post.id}`"
-    class="border-b border border-gray-900 rounded-lg shadow-md p-5 space-y-2"
+    class="border border-gray-900 rounded-lg hover:shadow-2xl p-5 space-y-2"
   >
     <NuxtImg :src="post.image" class="rounded-t" />
     <h2 class="text-xl font-bold">{{ post.title }}</h2>
