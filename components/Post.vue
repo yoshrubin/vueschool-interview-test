@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
+import { useDateFormat } from "@vueuse/core";
 
 const { post } = defineProps<{ post?: PostWithUser }>();
 const datePosted = post?.publishedAt
   ? new Date(post.publishedAt).toLocaleDateString()
   : "";
+
+const formattedDate = useDateFormat(datePosted, "MMMM Do, YYYY");
 </script>
 
 <template>
@@ -20,7 +23,7 @@ const datePosted = post?.publishedAt
       <NuxtImg class="w-16 rounded-full" :src="post.user.avatar" />
       <div>
         <p>{{ post.user.firstName }} {{ post.user.lastName }}</p>
-        <p>{{ datePosted }}</p>
+        <p class="text-sm text-gray-700">{{ formattedDate }}</p>
       </div>
     </div>
   </NuxtLink>
