@@ -16,11 +16,23 @@ const formattedDate = useDateFormat(datePosted, "MMMM Do, YYYY");
     :to="`/posts/${post.id}`"
     class="border border-gray-900 rounded-lg hover:shadow-2xl p-5 space-y-2"
   >
-    <NuxtImg :src="post.image" class="rounded-t" />
+    <NuxtImg
+      :src="post.image"
+      class="rounded-t"
+      width="400"
+      height="300"
+      loading="lazy"
+    />
     <h2 class="text-xl font-bold">{{ post.title }}</h2>
     <p class="text-gray-500">{{ post.excerpt }}</p>
     <div class="flex space-x-2 items-center">
-      <NuxtImg class="w-16 rounded-full" :src="post.user.avatar" />
+      <NuxtImg
+        class="w-16 rounded-full"
+        :src="post.user.avatar"
+        width="64"
+        height="64"
+        loading="lazy"
+      />
       <div>
         <p>{{ post.user.firstName }} {{ post.user.lastName }}</p>
         <p class="text-sm text-gray-700">{{ formattedDate }}</p>
