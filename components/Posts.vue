@@ -55,13 +55,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
+  <main
     ref="target"
     class="h-screen flex justify-center items-center flex-col overflow-auto"
   >
-    <div v-if="isLoading && !posts.length">Loading...</div>
-    <div v-else class="h-full p-10 flex flex-col">
-      <div class="flex items-center mb-4">
+    <section v-if="isLoading && !posts.length">Loading...</section>
+    <section v-else class="h-full p-10 flex flex-col">
+      <header class="flex items-center mb-4">
         <input
           v-model="query.order"
           type="radio"
@@ -77,11 +77,11 @@ onMounted(() => {
           id="oldestFirst"
         />
         <label class="ml-2" for="oldestFirst">Oldest First</label>
-      </div>
-      <div class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
+      </header>
+      <section class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
         <Post :post="post" v-for="(post, index) in posts" :key="index" />
         <div v-if="isLoading">Loading...</div>
-      </div>
-    </div>
-  </div>
+      </section>
+    </section>
+  </main>
 </template>
