@@ -59,7 +59,8 @@ onMounted(() => {
     ref="target"
     class="h-screen flex justify-center items-center flex-col overflow-auto"
   >
-    <div class="h-full p-10 flex flex-col">
+    <div v-if="isLoading && !posts.length">Loading...</div>
+    <div v-else class="h-full p-10 flex flex-col">
       <div class="flex items-center mb-4">
         <input
           v-model="query.order"
