@@ -11,7 +11,7 @@ const query = reactive({
 const target = ref<HTMLElement | null>(null);
 const posts = ref<PostWithUser[]>([]);
 const canLoadMore = ref(true);
-const isLoading = ref(true);
+const isLoading = ref(false);
 
 useInfiniteScroll(
   target,
