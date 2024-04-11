@@ -67,7 +67,7 @@ onMounted(() => {
     <section v-if="isLoading && !posts.length">Loading...</section>
     <section v-else class="h-full p-10 flex flex-col">
       <SortBy v-model:order="query.order" />
-      <section class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto max-w-4xl">
         <PostCard :post="post" v-for="post in posts" :key="post.id" />
         <div v-if="isLoading">Loading...</div>
       </section>
