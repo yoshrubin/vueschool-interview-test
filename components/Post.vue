@@ -4,6 +4,7 @@ import { useDateFormat } from "@vueuse/core";
 
 const { post } = defineProps<{ post?: PostWithUser }>();
 
+const user = post?.user as User;
 const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
 </script>
 <template>
@@ -19,11 +20,11 @@ const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
       <div v-else class="w-full h-96 bg-gray-300 animate-pulse" />
     </header>
     <main class="flex justify-center items-center flex-col overflow-auto">
-      <section class="p-10 max-w-4xl mx-auto space-y-4" v-if="post">
+      <article class="p-10 max-w-4xl mx-auto space-y-4" v-if="post">
         <h1 class="text-4xl font-bold">{{ post.title }}</h1>
-        <AuthorDetails :user="post.user" :date="formattedDate" />
-        <article v-html="post.content" />
-      </section>
+        <AuthorDetails :user="user" :date="formattedDate" />
+        <ContentDoc v-html="post.content" />
+      </article>
       <section v-else>Loading...</section>
     </main>
   </div>

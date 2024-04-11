@@ -4,6 +4,7 @@ import { useDateFormat } from "@vueuse/core";
 
 const { post } = defineProps<{ post?: PostWithUser }>();
 
+const user = post?.user as User;
 const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
 </script>
 
@@ -23,6 +24,6 @@ const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
     />
     <h2 class="text-xl font-bold">{{ post.title }}</h2>
     <p class="text-gray-500">{{ post.excerpt }}</p>
-    <AuthorDetails :user="post.user" :date="formattedDate" />
+    <AuthorDetails :user="user" :date="formattedDate" />
   </NuxtLink>
 </template>
