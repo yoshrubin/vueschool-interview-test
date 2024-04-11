@@ -16,8 +16,8 @@ const isLoading = ref(true);
 useInfiniteScroll(
   target,
   async () => {
-    query.offset += query.limit;
     await loadData();
+    query.offset += query.limit;
   },
   { distance: 100, canLoadMore: () => canLoadMore.value }
 );
