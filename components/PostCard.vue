@@ -10,7 +10,7 @@ const user = post?.user as User;
   <NuxtLink
     v-if="post"
     :to="`/posts/${post.id}`"
-    class="border border-gray-900 rounded-lg hover:shadow-2xl p-5 space-y-2"
+    class="border border-gray-900 rounded-lg hover:shadow-lg p-5 space-y-2"
   >
     <NuxtImg
       :src="post.image"
