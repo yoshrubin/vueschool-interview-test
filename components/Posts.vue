@@ -61,7 +61,7 @@ onMounted(() => {
   >
     <section v-if="isLoading && !posts.length">Loading...</section>
     <section v-else class="h-full p-10 flex flex-col">
-      <header class="flex items-center mb-4">
+      <section class="flex items-center mb-4">
         <input
           v-model="query.order"
           type="radio"
@@ -77,7 +77,7 @@ onMounted(() => {
           id="oldestFirst"
         />
         <label class="ml-2" for="oldestFirst">Oldest First</label>
-      </header>
+      </section>
       <section class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
         <PostCard :post="post" v-for="post in posts" :key="post.id" />
         <div v-if="isLoading">Loading...</div>
