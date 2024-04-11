@@ -18,6 +18,7 @@ const user = post?.user as User;
       width="400"
       height="200"
       loading="lazy"
+      densities="x1 x2"
       sizes="sm:320px, md:400px, 400px"
       :alt="post.title"
       format="webp"

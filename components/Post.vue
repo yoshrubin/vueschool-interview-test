@@ -12,8 +12,8 @@ const user = post?.user as User;
         v-if="post"
         :src="post.image"
         class="w-full h-96 object-cover"
-        loading="lazy"
-        :alt="post.title"
+        preload
+        alt=""
         width="1920"
         height="1080"
         format="webp"

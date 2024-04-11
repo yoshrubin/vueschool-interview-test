@@ -17,6 +17,7 @@ const date = useDateFormat(publishedDate, "MMMM Do, YYYY");
       width="64"
       height="64"
       loading="lazy"
+      densities="x1 x2"
       format="webp"
       :placeholder="[64, 64, 75, 5]"
       :alt="`${user.firstName} ${user.lastName}`"
@@ -25,7 +26,7 @@ const date = useDateFormat(publishedDate, "MMMM Do, YYYY");
     <div>
       <p>{{ user.firstName }} {{ user.lastName }}</p>
       <p class="text-sm text-gray-700">{{ date }}</p>
-      <a :href="`mailto:${user.email}`" class="text-blue-500 hover:underline">
+      <a :href="`mailto:${user.email}`" class="text-blue-600 hover:underline">
         💌 Contact the author
       </a>
     </div>
