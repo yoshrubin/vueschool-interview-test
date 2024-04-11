@@ -3,11 +3,8 @@ import type { PostWithUser } from "~/types";
 import { useDateFormat } from "@vueuse/core";
 
 const { post } = defineProps<{ post?: PostWithUser }>();
-const datePosted = post?.publishedAt
-  ? new Date(post.publishedAt).toLocaleDateString()
-  : "";
 
-const formattedDate = useDateFormat(datePosted, "MMMM Do, YYYY");
+const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
 </script>
 
 <template>
