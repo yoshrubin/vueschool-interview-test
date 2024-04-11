@@ -23,7 +23,7 @@ const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
       <article class="p-10 max-w-4xl mx-auto space-y-4" v-if="post">
         <h1 class="text-4xl font-bold">{{ post.title }}</h1>
         <AuthorDetails :user="user" :date="formattedDate" />
-        <ContentDoc v-html="post.content" />
+        <p class="prose lg:prose-xl" v-html="post.content" />
       </article>
       <section v-else>Loading...</section>
     </main>
