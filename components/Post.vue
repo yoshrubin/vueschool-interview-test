@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
-import { useDateFormat } from "@vueuse/core";
 
 const { post } = defineProps<{ post?: PostWithUser }>();
 
 const user = post?.user as User;
-const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
 </script>
 <template>
   <div class="min-h-screen">
@@ -27,7 +25,7 @@ const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
     <main class="flex justify-center items-center flex-col overflow-auto">
       <article class="p-10 max-w-4xl mx-auto space-y-4" v-if="post">
         <h1 class="text-4xl font-bold">{{ post.title }}</h1>
-        <AuthorDetails :user="user" :date="formattedDate" />
+        <AuthorDetails :user="user" :publishedDate="post.publishedAt" />
         <div class="prose lg:prose-xl" v-html="post.content" />
       </article>
       <section v-else>Loading...</section>

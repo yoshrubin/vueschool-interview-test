@@ -1,5 +1,11 @@
 <script setup lang="ts">
-const { user, date } = defineProps<{ user: User; date: string }>();
+import { useDateFormat } from "@vueuse/core";
+const { user, publishedDate } = defineProps<{
+  user: User;
+  publishedDate: number | undefined;
+}>();
+console.log(publishedDate);
+const date = useDateFormat(publishedDate, "MMMM Do, YYYY");
 </script>
 <template>
   <div class="flex space-x-2 items-center">
