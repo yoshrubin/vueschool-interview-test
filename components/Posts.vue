@@ -16,6 +16,8 @@ const isLoading = ref(true);
 useInfiniteScroll(
   target,
   async () => {
+    if (isLoading.value) return;
+    if (!canLoadMore.value) return;
     await loadData();
   },
   { distance: 100, canLoadMore: () => canLoadMore.value }
