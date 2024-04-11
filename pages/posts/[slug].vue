@@ -3,10 +3,13 @@ import type { PostWithUser } from "~/types";
 
 const route = useRoute();
 const slug = route.params.slug as string;
-const { data: post, error } = await useFetch<PostWithUser>(
-  `/api/posts/${slug}`,
-  { query: { include: "user" } }
-);
+const {
+  data: post,
+  pending,
+  error,
+} = await useFetch<PostWithUser>(`/api/posts/${slug}`, {
+  query: { include: "user" },
+});
 
 if (error.value) {
   showError(error.value);
@@ -16,5 +19,6 @@ if (!post.value) {
 }
 </script>
 <template>
-  <Post :post="post" />
+  <Post v-if="post" :post="post" />
+  <LoadingSpinner class="text-gray-900 h-16 w-16" v-else />
 </template>
