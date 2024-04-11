@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useInfiniteScroll } from "@vueuse/core";
 import type { PostWithUser } from "~/types";
+import { useInfiniteScroll } from "@vueuse/core";
 const query = reactive({
   limit: 10,
   offset: 0,
