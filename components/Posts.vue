@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
 import { useInfiniteScroll } from "@vueuse/core";
-import LoadingSpinner from "./LoadingSpinner.vue";
 const query = reactive({
   limit: 10,
   offset: 0,
@@ -13,11 +12,11 @@ const target = ref<HTMLElement | null>(null);
 const posts = ref<PostWithUser[]>([]);
 const canLoadMore = ref(true);
 const isLoading = ref(true);
+
 useInfiniteScroll(
   target,
   async () => {
     await loadData();
-    query.offset += query.limit;
   },
   { distance: 100, canLoadMore: () => canLoadMore.value }
 );
@@ -29,6 +28,7 @@ async function loadData() {
     data = await $fetch<PostWithUser[]>("/api/posts", {
       query,
     });
+    query.offset += query.limit;
   } catch (error) {
     console.error(error);
   }
