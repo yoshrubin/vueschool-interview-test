@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
 import { useInfiniteScroll } from "@vueuse/core";
+import LoadingSpinner from "./LoadingSpinner.vue";
 const query = reactive({
   limit: 10,
   offset: 0,
@@ -11,7 +12,7 @@ const query = reactive({
 const target = ref<HTMLElement | null>(null);
 const posts = ref<PostWithUser[]>([]);
 const canLoadMore = ref(true);
-const isLoading = ref(false);
+const isLoading = ref(true);
 useInfiniteScroll(
   target,
   async () => {
@@ -64,12 +65,15 @@ onMounted(() => {
     ref="target"
     class="h-screen flex justify-center items-center flex-col overflow-auto"
   >
-    <section v-if="isLoading && !posts.length">Loading...</section>
+    <LoadingSpinner
+      v-if="isLoading && !posts.length"
+      class="text-gray-900 h-16 w-16"
+    />
     <section v-else class="h-full p-10 flex flex-col">
       <SortBy v-model:order="query.order" />
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto max-w-4xl">
         <PostCard :post="post" v-for="post in posts" :key="post.id" />
-        <div v-if="isLoading">Loading...</div>
+        <LoadingSpinner v-if="isLoading" class="text-gray-900 h-8 w-8" />
       </section>
     </section>
   </main>
