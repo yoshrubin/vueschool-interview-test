@@ -16,6 +16,11 @@ const formattedDate = useDateFormat(post?.publishedAt, "MMMM Do, YYYY");
         class="w-full h-96 object-cover"
         loading="lazy"
         :alt="post.title"
+        width="1920"
+        height="1080"
+        format="webp"
+        sizes="sm:320px, md:640px, 1920px"
+        :placeholder="[1920, 1080, 75, 5]"
       />
       <div v-else class="w-full h-96 bg-gray-300 animate-pulse" />
     </header>

@@ -10,6 +10,8 @@ const { user, date } = defineProps<{ user: User; date: string }>();
       width="64"
       height="64"
       loading="lazy"
+      format="webp"
+      :placeholder="[64, 64, 75, 5]"
       :alt="`${user.firstName} ${user.lastName}`"
     />
     <div v-else class="w-16 h-16 bg-gray-300 rounded-full animate-pulse" />
