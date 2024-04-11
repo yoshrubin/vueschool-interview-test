@@ -13,7 +13,9 @@ const user = post?.user as User;
         :src="post.image"
         class="w-full h-96 object-cover"
         preload
+        fit="cover"
         alt=""
+        densities="x1 x2"
         width="1920"
         height="1080"
         format="webp"
