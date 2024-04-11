@@ -11,7 +11,7 @@ const user = post?.user as User;
     <header>
       <NuxtImg
         v-if="post"
-        :src="post.image"
+        :src="post.image + '.webp'"
         class="w-full h-96 object-cover"
         preload
         fit="cover"
