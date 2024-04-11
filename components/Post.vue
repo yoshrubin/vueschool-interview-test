@@ -43,5 +43,6 @@ const formattedDate = useDateFormat(datePosted, "MMMM Do, YYYY");
         </div>
       </div>
       <article v-html="post?.content" />
+    </section>
   </main>
 </template>
