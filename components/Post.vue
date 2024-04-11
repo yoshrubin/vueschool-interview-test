@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
+import LoadingSpinner from "./LoadingSpinner.vue";
 
 const { post } = defineProps<{ post?: PostWithUser }>();
 
@@ -25,12 +26,17 @@ const user = post?.user as User;
       <div v-else class="w-full h-96 bg-gray-300 animate-pulse" />
     </header>
     <main class="flex justify-center items-center flex-col overflow-auto">
-      <article class="p-10 max-w-4xl mx-auto space-y-4" v-if="post">
-        <h1 class="text-4xl font-bold">{{ post.title }}</h1>
-        <AuthorDetails :user="user" :publishedDate="post.publishedAt" />
-        <div class="prose lg:prose-xl" v-html="post.content" />
-      </article>
-      <section v-else>Loading...</section>
+      <section v-if="post" class="px-10 max-w-4xl mx-auto space-y-4 mt-5">
+        <NuxtLink to="/posts" class="text-blue-600 hover:underline self-start">
+          ← Back to posts
+        </NuxtLink>
+        <article>
+          <h1 class="text-4xl font-bold">{{ post.title }}</h1>
+          <AuthorDetails :user="user" :publishedDate="post.publishedAt" />
+          <div class="prose lg:prose-xl" v-html="post.content" />
+        </article>
+      </section>
+      <LoadingSpinner v-else class="text-gray-900 h-16 w-16" />
     </main>
   </div>
 </template>
