@@ -79,7 +79,7 @@ onMounted(() => {
         <label class="ml-2" for="oldestFirst">Oldest First</label>
       </header>
       <section class="grid grid-cols-2 gap-4 mx-auto max-w-4xl">
-        <Post :post="post" v-for="post in posts" :key="post.id" />
+        <PostCard :post="post" v-for="post in posts" :key="post.id" />
         <div v-if="isLoading">Loading...</div>
       </section>
     </section>
