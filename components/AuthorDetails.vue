@@ -19,7 +19,6 @@ const date = useDateFormat(publishedDate, "MMMM Do, YYYY");
       loading="lazy"
       densities="x1 x2"
       format="webp"
-      :placeholder="[64, 64, 75, 5]"
       :alt="`${user.firstName} ${user.lastName}`"
     />
     <div v-else class="w-16 h-16 bg-gray-300 rounded-full animate-pulse" />
