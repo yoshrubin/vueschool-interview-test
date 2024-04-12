@@ -17,6 +17,12 @@ if (error.value) {
 if (!post.value) {
   showError("Post not found");
 }
+
+defineOgImageComponent("NuxtSeo", {
+  title: post.value?.title ?? "",
+  description: post.value?.excerpt ?? "",
+  alt: post.value?.title ?? "",
+});
 </script>
 <template>
   <Post v-if="post" :post="post" />

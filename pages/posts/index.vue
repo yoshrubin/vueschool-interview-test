@@ -5,6 +5,7 @@ useSeoMeta({
   description: "Check out our blog posts!",
   ogDescription: "Check out our blog posts!",
 });
+defineOgImageComponent("NuxtSeo");
 </script>
 
 <template>
