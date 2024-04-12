@@ -11,16 +11,16 @@ const user = post?.user as User;
     <header>
       <NuxtImg
         v-if="post"
-        :src="post.image + '.webp'"
+        :src="post.image"
         class="w-full h-96 object-cover"
+        width="1920"
+        height="1080"
         preload
         fit="cover"
         alt=""
         densities="x1 x2"
-        width="1920"
-        height="1080"
         format="webp"
-        sizes="sm:320px, md:640px, 1920px"
+        sizes="sm:320px, md:640px, lg:1024px, 1920px"
         :placeholder="[1920, 1080, 75, 5]"
       />
       <div v-else class="w-full h-96 bg-gray-300 animate-pulse" />
