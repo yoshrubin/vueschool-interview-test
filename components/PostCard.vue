@@ -21,7 +21,6 @@ const imgLoading = ref(true);
       fit="cover"
       width="400"
       height="225"
-      loading="lazy"
       densities="x1 x2"
       sizes="sm:200px, md:300px, lg:400px, 400px"
       :alt="post.title"
