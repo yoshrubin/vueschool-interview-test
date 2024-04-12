@@ -16,6 +16,7 @@ const query = reactive({
   offset: 0,
   order: "newestFirst",
   include: "user",
+  select: "image, title, publishedAt, excerpt, id",
 });
 
 const target = ref<HTMLElement | null>(null);
