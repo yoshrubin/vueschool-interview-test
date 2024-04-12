@@ -18,7 +18,6 @@ const imgLoading = ref(true);
       :src="user.avatar ?? ''"
       width="64"
       height="64"
-      loading="lazy"
       densities="x1 x2"
       format="webp"
       :alt="`${user.firstName} ${user.lastName}`"
