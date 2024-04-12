@@ -57,6 +57,12 @@ watch(
 );
 
 const route = useRoute();
+watch(
+  () => route.query.order,
+  () => {
+    query.order = route.query.order as string;
+  }
+);
 onMounted(() => {
   if (route.query.order) {
     query.order = route.query.order as string;
