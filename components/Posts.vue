@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
-import { useInfiniteScroll } from "@vueuse/core";
+import { useInfiniteScroll, useBreakpoints } from "@vueuse/core";
+
+const breakpoints = useBreakpoints({
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+});
+
+const isMobile = breakpoints.isSmaller("md");
+
 const query = reactive({
-  limit: 10,
+  limit: isMobile ? 3 : 6,
   offset: 0,
   order: "newestFirst",
   include: "user",
