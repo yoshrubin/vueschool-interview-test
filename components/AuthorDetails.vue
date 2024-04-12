@@ -7,21 +7,27 @@ const { user, publishedDate } = defineProps<{
 }>();
 
 const date = useDateFormat(publishedDate, "MMMM Do, YYYY");
+
+const imgLoading = ref(true);
 </script>
 <template>
   <div class="flex space-x-2 items-center">
     <NuxtImg
-      v-if="user.avatar"
+      v-show="!imgLoading"
       class="w-16 rounded-full"
-      :src="user.avatar"
+      :src="user.avatar ?? ''"
       width="64"
       height="64"
       loading="lazy"
       densities="x1 x2"
       format="webp"
       :alt="`${user.firstName} ${user.lastName}`"
+      @load="imgLoading = false"
     />
-    <div v-else class="w-16 h-16 bg-gray-300 rounded-full animate-pulse" />
+    <div
+      v-show="imgLoading"
+      class="w-16 h-16 bg-gray-300 rounded-full animate-pulse"
+    />
     <div>
       <p>{{ user.firstName }} {{ user.lastName }}</p>
       <p class="text-sm text-gray-700">{{ date }}</p>
