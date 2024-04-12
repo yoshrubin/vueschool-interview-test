@@ -5,25 +5,30 @@ import LoadingSpinner from "./LoadingSpinner.vue";
 const { post } = defineProps<{ post?: PostWithUser }>();
 
 const user = post?.user as User;
+
+const imgLoading = ref(true);
 </script>
 <template>
   <div class="min-h-screen">
     <header>
       <NuxtImg
-        v-if="post"
-        :src="post.image"
-        class="w-full h-96 object-cover"
+        v-show="!imgLoading"
+        :src="post?.image"
+        class="w-full h-48 md:h-96 object-cover"
         width="1920"
         height="1080"
-        preload
         fit="cover"
+        preload
         alt=""
         densities="x1 x2"
         format="webp"
-        sizes="sm:320px, md:640px, lg:1024px, 1920px"
-        :placeholder="[1920, 1080, 75, 5]"
+        sizes="xs:320px, sm:640px, md:768px, lg:1024px, 1920px"
+        @load="imgLoading = false"
       />
-      <div v-else class="w-full h-96 bg-gray-300 animate-pulse" />
+      <div
+        v-show="imgLoading"
+        class="w-full h-48 md:h-96 bg-gray-300 animate-pulse"
+      />
     </header>
     <main class="flex justify-center items-center flex-col overflow-auto">
       <section v-if="post" class="px-10 max-w-4xl mx-auto space-y-4 mt-5">
