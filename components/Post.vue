@@ -31,11 +31,11 @@ const imgLoading = ref(true);
       />
     </header>
     <main class="flex justify-center items-center flex-col overflow-auto">
-      <section v-if="post" class="px-10 max-w-4xl mx-auto space-y-4 mt-5">
+      <section v-if="post" class="px-10 max-w-4xl mx-auto mt-4">
         <NuxtLink to="/posts" class="text-blue-600 hover:underline self-start">
           ← Back to posts
         </NuxtLink>
-        <article>
+        <article class="space-y-4 mt-4">
           <h1 class="text-4xl font-bold">{{ post.title }}</h1>
           <AuthorDetails :user="user" :publishedDate="post.publishedAt" />
           <div class="prose lg:prose-xl" v-html="post.content" />
