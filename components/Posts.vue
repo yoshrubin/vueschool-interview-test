@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import type { PostWithUser } from "~/types";
-import { useInfiniteScroll, useBreakpoints } from "@vueuse/core";
-
-const breakpoints = useBreakpoints({
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-});
-
-const isMobile = breakpoints.isSmaller("md");
+import { useInfiniteScroll } from "@vueuse/core";
 
 const query = reactive({
-  limit: isMobile ? 3 : 6,
+  limit: 6,
   offset: 0,
   order: "newestFirst",
   include: "user",
@@ -36,18 +27,18 @@ useInfiniteScroll(
 
 async function loadData() {
   isLoading.value = true;
-  let data: PostWithUser[] = [];
-  try {
-    data = await $fetch<PostWithUser[]>("/api/posts", {
-      query,
-    });
-    query.offset += query.limit;
-  } catch (error) {
+  // let data: PostWithUser[] = [];
+
+  const { data, error } = await useFetch<PostWithUser[]>("/api/posts", {
+    query,
+  });
+  query.offset += query.limit;
+  if (error.value) {
     console.error(error);
   }
   isLoading.value = false;
-  if (data.length) {
-    posts.value.push(...data);
+  if (data.value?.length) {
+    posts.value.push(...data.value);
   } else {
     canLoadMore.value = false;
   }

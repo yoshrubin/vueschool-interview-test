@@ -4,25 +4,33 @@ import type { PostWithUser } from "~/types";
 const { post } = defineProps<{ post?: PostWithUser }>();
 
 const user = post?.user as User;
+
+const imgLoading = ref(true);
 </script>
 
 <template>
   <NuxtLink
     v-if="post"
     :to="`/posts/${post.id}`"
-    class="border border-gray-900 rounded-lg hover:shadow-lg p-5 space-y-2"
+    class="border border-gray-900 w-full flex flex-col rounded-lg hover:shadow-lg p-5 space-y-2"
   >
     <NuxtImg
+      v-show="!imgLoading"
       :src="post.image + '.webp'"
       class="rounded-t"
-      width="1920"
-      height="1080"
+      fit="cover"
+      width="400"
+      height="225"
       loading="lazy"
       densities="x1 x2"
-      sizes="sm:200px, 400px"
+      sizes="sm:200px, md:300px, lg:400px, 400px"
       :alt="post.title"
       format="webp"
-      :placeholder="[400, 250, 75, 5]"
+      @load="imgLoading = false"
+    />
+    <div
+      v-show="imgLoading"
+      class="w-full aspect-video bg-gray-300 animate-pulse rounded-t"
     />
     <h2 class="text-xl font-bold">{{ post.title }}</h2>
     <p class="text-gray-500">{{ post.excerpt }}</p>
