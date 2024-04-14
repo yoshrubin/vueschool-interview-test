@@ -6,9 +6,9 @@ const { user, publishedDate } = defineProps<{
   publishedDate: number | undefined;
 }>();
 
-const date = useDateFormat(publishedDate, "MMMM Do, YYYY");
+const date: ComputedRef<string> = useDateFormat(publishedDate, "MMMM Do, YYYY");
 
-const imgLoading = ref(true);
+const imgLoading = ref<boolean>(true);
 </script>
 <template>
   <div class="flex space-x-2 items-center">
