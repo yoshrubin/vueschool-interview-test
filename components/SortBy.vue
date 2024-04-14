@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const order = defineModel("order");
+import type { OrderBy } from "~/types";
+
+const order = defineModel<OrderBy>("order");
 </script>
 <template>
   <section class="flex items-center mb-4">
