@@ -5,7 +5,7 @@ const { post } = defineProps<{ post?: PostWithUser }>();
 
 const user = post?.user as User;
 
-const imgLoading = ref(true);
+const imgLoading = ref<boolean>(true);
 </script>
 
 <template>
