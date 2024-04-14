@@ -17,3 +17,5 @@ export interface User {
 }
 
 export type PostWithUser = Post & { user: User };
+
+export type OrderBy = "newestFirst" | "oldestFirst" | undefined;
