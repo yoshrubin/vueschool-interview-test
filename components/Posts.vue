@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import type { PostWithUser } from "~/types";
+import type { OrderBy, PostWithUser } from "~/types";
 import { useInfiniteScroll } from "@vueuse/core";
+import type { RouteLocationNormalizedLoaded, Router } from "vue-router";
 
-const query = reactive({
+interface Query {
+  limit: number;
+  offset: number;
+  order: OrderBy;
+  include: string;
+  select: string;
+}
+
+const query: Query = reactive({
   limit: 6,
   offset: 0,
   order: "newestFirst",
@@ -12,8 +21,8 @@ const query = reactive({
 
 const target = ref<HTMLElement | null>(null);
 const posts = ref<PostWithUser[]>([]);
-const canLoadMore = ref(true);
-const isLoading = ref(false);
+const canLoadMore = ref<boolean>(true);
+const isLoading = ref<boolean>(false);
 
 useInfiniteScroll(
   target,
@@ -27,7 +36,6 @@ useInfiniteScroll(
 
 async function loadData() {
   isLoading.value = true;
-  // let data: PostWithUser[] = [];
 
   const { data, error } = await useFetch<PostWithUser[]>("/api/posts", {
     query,
@@ -44,7 +52,7 @@ async function loadData() {
   }
 }
 
-const router = useRouter();
+const router: Router = useRouter();
 watch(
   () => query.order,
   () => {
@@ -56,16 +64,16 @@ watch(
   }
 );
 
-const route = useRoute();
+const route: RouteLocationNormalizedLoaded = useRoute();
 watch(
   () => route.query.order,
   () => {
-    query.order = route.query.order as string;
+    query.order = route.query.order as OrderBy;
   }
 );
 onMounted(() => {
   if (route.query.order) {
-    query.order = route.query.order as string;
+    query.order = route.query.order as OrderBy;
   }
 });
 </script>
