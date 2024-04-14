@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import type { OrderBy, PostWithUser } from "~/types";
+import type { OrderBy, PostWithUser, Query } from "~/types";
 import { useInfiniteScroll } from "@vueuse/core";
 import type { RouteLocationNormalizedLoaded, Router } from "vue-router";
-
-interface Query {
-  limit: number;
-  offset: number;
-  order: OrderBy;
-  include: string;
-  select: string;
-}
 
 const query: Query = reactive({
   limit: 6,
